@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>jQuery Sandbox</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    
+  </style>
+</head>
+<body>
+  <header>
+    <h1>jQuery Sandbox</h1>
+  </header>
+  <div class='foo'>
+    <p id="bar">this is a test</p>
+  </div>
+
+  <script>
+    // $(document).ready(function() {
+    //   $('.foo #bar').css({color: 'red', border: '1px solid blue'}).text('new text!').click(function() {
+    //     $(this).attr('title', 'new title');
+    //     $(this).width('100px');
+    //   });
+    //   $('.foo #bar').click();
+    // });
+
+    // I assumed you wanted me to keep the on click, but because it's triggered right away -  this would do the same thing:
+    // $(document).ready(function() {
+    //   $('.foo #bar').css({color: 'red', border: '1px solid blue', width: '100px'}).text('new text!').attr('title', 'new title');
+    // });
+
+
+      const fooBar = document.querySelector('.foo #bar');
+      fooBar.style.cssText = 'color:red;border:1px solid blue;width:100px;';
+      fooBar.innerHTML = "new title";
+      fooBar.setAttribute("title", "new title");
+
+
+      // fooBar.onclick = function() {myFunction()};
+
+      // function myFunction() {
+      //   fooBar.setAttribute("title", "new title");
+      //   fooBar.style.width = "100px";
+      // }
+
+      // fooBar.click();
+
+  </script>
+</body>
+</html>
