@@ -1,0 +1,18 @@
+these are rules of thumb - not absolute
+
+
+rem vs em 
+- rem is relative to the root element (html), usually defaults to 16px, adapts to users preferences/settings
+
+font-size: rem;
+
+width: percentage + max-width, 
+--ch units are also good (one ch is roughly equal to the width of a zero in any font)
+--ie max width 45ch is roughly 45 characters per line
+
+height: try to use min height instead of height, percentage, rem or viewportheight are okay
+
+padding/margin: em or rem -- depends on if want it to adjust to elements font size then use em.
+
+media-queries: can use ems if not pixels
+- for more info on this: https://zellwk.com/blog/media-query-units/

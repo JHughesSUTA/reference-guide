@@ -1,0 +1,7 @@
+letter-spacing:
+- in figma it's a percentage, so for example 65% letter-spacing we can do calc(65 * 0 s.01em);
+
+
+pixels to rem
+
+.0625 * px = rem
