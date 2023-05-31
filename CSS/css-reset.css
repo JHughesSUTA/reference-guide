@@ -1,0 +1,39 @@
+/* reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+textarea,
+button,
+select {
+  font: inherit;
+}
+
+body {
+  min-height: 100vh;
+}
+
+/* html {
+  color-scheme: dark light;
+} */
+
+/* 
+more info on https://www.youtube.com/shorts/2lyDv0wOQuQ (kevin powell: simplest CSS rest to prevent headaches)
+ */
