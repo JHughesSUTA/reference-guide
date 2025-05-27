@@ -1,0 +1,62 @@
+<!-- EXAMPLE -->
+
+<button
+  id="menu-toggle"
+  aria-controls="main-nav"
+  aria-expanded="false"
+  aria-label="Open main menu"
+>
+  ☰
+</button>
+
+<nav id="main-nav" hidden>
+  <!-- Navigation links go here -->
+</nav>
+
+<script>
+  const toggleButton = document.getElementById("menu-toggle");
+  const navMenu = document.getElementById("main-nav");
+
+  toggleButton.addEventListener("click", () => {
+    const expanded = toggleButton.getAttribute("aria-expanded") === "true";
+
+    toggleButton.setAttribute("aria-expanded", String(!expanded));
+    toggleButton.setAttribute(
+      "aria-label",
+      expanded ? "Open main menu" : "Close main menu"
+    );
+
+    // Toggle visibility of the menu
+    navMenu.hidden = expanded;
+  });
+</script>
+
+<!-- 
+WHAT THIS COVERS
+aria-expanded	Communicates open/closed state
+aria-controls	Links button to menu element
+aria-label	Describes button function clearly
+Keyboard accessible	<button> is inherently focusable
+Menu visibility toggle	Prevents screen reader confusion 
+-->
+
+<!-- JQUERY version  -->
+<script>
+  $(document).ready(function () {
+    const $toggleButton = $("#header__menu-toggle");
+    const $navMenu = $("#mobile-menu");
+
+    $toggleButton.on("click", function () {
+      const expanded = $toggleButton.attr("aria-expanded") === "true";
+
+      $toggleButton.attr("aria-expanded", !expanded.toString());
+      $toggleButton.attr(
+        "aria-label",
+        expanded ? "Open main menu" : "Close main menu"
+      );
+
+      // Toggle visibility of the menu
+      $navMenu.prop("hidden", expanded);
+    });
+  });
+</script>
