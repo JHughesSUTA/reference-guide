@@ -17,4 +17,10 @@ React Toastify
   - set the ToastContainer component on the page
 - Use
   - import { toast } from "react-toastify";
+
+React Router
+- npm i react-router-dom
   
+SASS/SCSS 
+- npm install -D sass
+- just change the files to .scss
