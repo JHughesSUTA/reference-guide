@@ -58,6 +58,8 @@
 
 // Check if a user’s input is blank after trimming.
 
+// ====================================================== SOLUTIONS ======================================================
+
 // Return the last character of a string.
 // function getLastChar(str) {
 //   return str.charAt(str.length - 1);
