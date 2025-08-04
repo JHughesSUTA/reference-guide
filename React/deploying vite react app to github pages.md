@@ -20,9 +20,10 @@ npm install --save-dev gh-pages
 3. Add Deploy Scripts to package.json
    Add these scripts:
 
-```
+```js
 "scripts": {
   "dev": "vite",
+   // for TypeScript it should be  "build": "tsc -b && vite build",
   "build": "vite build",
   "lint": "eslint .",
   "preview": "vite preview",
