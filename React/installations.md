@@ -19,8 +19,16 @@ React Toastify
   - import { toast } from "react-toastify";
 
 React Router
+
 - npm i react-router-dom
-  
-SASS/SCSS 
+
+SASS/SCSS
+
 - npm install -D sass
 - just change the files to .scss
+
+Redux/Redux toolkit
+
+```
+npm install @reduxjs/toolkit react-redux
+```
