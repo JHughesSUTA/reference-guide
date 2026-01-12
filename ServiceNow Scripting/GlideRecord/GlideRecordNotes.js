@@ -112,3 +112,87 @@ while (incidentGR.next()) {
   // Delete record
   incidentGR.deleteRecord();
 }
+
+// DEMOS
+// print all incident numbers
+var incidentGR = new GlideRecord("incident");
+incidentGR.query();
+while (incidentGR.next()) {
+  gs.print(incidentGR.number);
+}
+
+// print all priority 1 incident numbers "priority once incident: *number* : *priority"
+var incidentGR = new GlideRecord("incident");
+incidentGR.addQuery("priority", 1);
+incidentGR.query();
+while (incidentGR.next()) {
+  gs.print(
+    "Priority 1 incident " + incidentGR.number + " : " + incidentGR.priority
+  );
+}
+
+// same but print the display value of priority rather than value
+gs.print(
+  "Priority 1 incident " +
+    incidentGR.number +
+    " : " +
+    incidentGR.priority.getDisplayValue()
+);
+
+// get method to get a specific incident
+var incidentGR = new GlideRecord("incident");
+incidentGR.get("57af7aec73d423002728660c4cf6a71c");
+gs.print(incidentGR.number);
+
+// addEncodedQuery
+// filter incidents to category=inquiry/help, active = true, opened by is "David Loo"
+var queryString =
+  "category=inquiry^active=true^opened_by=5137153cc611227c000bbd1bd8cd2007";
+var incidentGR = new GlideRecord("incident");
+incidentGR.addEncodedQuery(queryString);
+incidentGR.query();
+while (incidentGR.next()) {
+  gs.print(incidentGR.number);
+}
+
+// create new incident using GlideRecord - set the short description to something specific
+var newIncident = new GlideRecord("incident");
+newIncident.newRecord();
+newIncident.short_description = "this incident was created with a script";
+newIncident.insert();
+
+// print the returned sys_id from the inserted incident
+var newIncident = new GlideRecord("incident");
+newIncident.newRecord();
+newIncident.short_description = "this incident was created with a script";
+var newIncidentSysId = newIncident.insert();
+gs.print(newIncidentSysId);
+
+/*
+Create 5 new incidents:
+create counter value to add to the short description for each (Incident # counterValue)
+print the sys_id of each of the 5 new incidents (array)
+*/
+var newIncidents = [];
+var counter = 1;
+var incidentGR = new GlideRecord("incident");
+while (counter <= 5) {
+  incidentGR.newRecord();
+  incidentGR.short_description = "Incident #" + counter;
+  counter++;
+  newIncidents.push(incidentGR.insert());
+}
+gs.print(newIncidents);
+
+/* 
+delete records
+delete record where short description is "Incident #3"
+before deleting, check you have the right record by printing *incident# has *shortDescription
+*/
+var incidentGR = new GlideRecord("incident");
+incidentGR.addQuery("short_description", "Incident #3");
+incidentGR.query();
+while (incidentGR.next()) {
+  // gs.print(incidentGR.number + " has " + incidentGR.short_description);
+  incidentGR.deleteRecord();
+}
