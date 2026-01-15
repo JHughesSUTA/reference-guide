@@ -143,6 +143,10 @@ gs.print(
 var incidentGR = new GlideRecord("incident");
 incidentGR.get("57af7aec73d423002728660c4cf6a71c");
 gs.print(incidentGR.number);
+// using two arguments
+var incidentGR = new GlideRecord("incident");
+incidentGR.get("number", "INC0020168");
+gs.print(incidentGR.number);
 
 // addEncodedQuery
 // filter incidents to category=inquiry/help, active = true, opened by is "David Loo"
@@ -195,4 +199,114 @@ incidentGR.query();
 while (incidentGR.next()) {
   // gs.print(incidentGR.number + " has " + incidentGR.short_description);
   incidentGR.deleteRecord();
+}
+
+// order by short description, alphabetical order
+var incidentGR = new GlideRecord("incident");
+incidentGR.orderBy("short_description");
+incidentGR.query();
+while (incidentGR.next()) {
+  gs.print(incidentGR.number + " : " + incidentGR.short_description);
+}
+// order by short description, alphabetical order descending
+incidentGR.orderByDesc("short_description");
+
+// setLimit method
+// print numbers of first 5 problems
+var problemGR = new GlideRecord("problem");
+problemGR.setLimit(5);
+problemGR.query();
+while (problemGR.next()) {
+  gs.print(problemGR.number);
+}
+// do the same but order by short description in alphabetical order (print short desc instead of number)
+
+var problemGR = new GlideRecord("problem");
+problemGR.query();
+if (
+  problemGR.canCreate() &&
+  problemGR.canRead() &&
+  problemGR.canWrite &&
+  problemGR.canDelete()
+) {
+  gs.print("I have access to create, read, write and delete!");
+}
+
+// getRowCount
+// print the row count of incidents
+var incidentGR = new GlideRecord("incident");
+incidentGR.query();
+gs.print(incidentGR.getRowCount());
+
+// hasNext() - returns a boolean value if there is another record in the array like object, doesn't perform the iteration tho
+var incidentGR = new GlideRecord("incident");
+incidentGR.query();
+gs.print(incidentGR.hasNext());
+
+// make hasNext print false by querying something that doesn't exist
+var incidentGR = new GlideRecord("incident");
+incidentGR.addQuery("priority", 0);
+incidentGR.query();
+gs.print(incidentGR.hasNext());
+
+// getLink()
+// print a link to a specific incident
+var incidentGR = new GlideRecord("incident");
+incidentGR.get("number", "INC002016");
+gs.print(incidentGR.getLink());
+
+// delete all incidents that contain a string of 'incident *'. first log them to the screen
+var incidentGR = new GlideRecord("incident");
+incidentGR.addEncodedQuery("short_descriptionLIKEincident #");
+incidentGR.query();
+// while (incidentGR.next()) {
+//   gs.print(incidentGR.short_description);
+// }
+incidentGR.deleteMultiple();
+
+// updating records
+// get an incident and update the urgency to 2
+var incidentGR = new GlideRecord("incident");
+incidentGR.get("*incident_number");
+incidentGR.urgency = 2;
+incidentGR.update();
+
+// update all incidents that have an urgency of 2 and change to urgency 3 (first print)
+var incidentGR = new GlideRecord("incident");
+incidentGR.addQuery("urgency", 2);
+incidentGR.query();
+while (incidentGR.next()) {
+  gs.print(incidentGR.number);
+  incidentGR.urgency = 3;
+  incidentGR.update();
+}
+
+// addNullQuery
+// find all incidents that do not have a short description and print their number
+var incidentGR = new GlideRecord("incident");
+incidentGR.addNullQuery("short_description");
+incidentGR.query();
+while (incidentGR.next()) {
+  gs.print(incidentGR.number);
+}
+// find all incidents that DOES HAVE a short description and print their number
+var incidentGR = new GlideRecord("incident");
+incidentGR.addNotNullQuery("short_description");
+incidentGR.query();
+while (incidentGR.next()) {
+  gs.print(incidentGR.number);
+}
+
+// GlideRecordSecure - has all the same methods as GlideRecord, performs ACL checking. used to secure script includes
+// we do not need to write canWrite(), canRead() etc
+
+// GlideAggregate - extends GlideRecord class and is used for aggregate queries (count, min, max, sum, avg)
+// commonly used in reports and scripts/lists that perform calculations
+// only works on number fields
+var count = new GlideAggregate("incident");
+count.addAggregate("COUNT");
+count.query();
+var incidents = 0;
+if (count.next()) {
+  incidents = count.getAggregate("Count");
 }
