@@ -18,9 +18,10 @@ hasRoleFromList();
 hasRoles();
 
 // DEMO
+// ctrl + shift + j to open javascript executor
 // console.dir(g_user) in console to see all the properties
 
-// alert 'hello firstName lastName. Your user id is: xxxxxxx' using glideUser in the js executer
+// alert 'hello firstName lastName. Your user id is: xxxxxxx' using glideUser in the js executor
 alert(
   "Hello " +
     g_user.firstName +
