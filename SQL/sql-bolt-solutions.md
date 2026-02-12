@@ -168,6 +168,82 @@ ORDER BY population DESC
 LIMIT 2 OFFSET 2;
 ```
 
+## Lesson 6
+
+### 1. Find the domestic and international sales for each movie
+
+```SQL
+SELECT title, domestic_sales, international_sales 
+FROM movies
+  JOIN boxoffice
+    ON movies.id = boxoffice.movie_id;
+```
+
+### 2. Show the sales numbers for each movie that did better internationally rather than domestically
+
+```SQL
+SELECT title, domestic_sales, international_sales
+FROM movies
+  JOIN boxoffice
+    ON movies.id = boxoffice.movie_id
+WHERE international_sales > domestic_sales;
+```
+
+### 3. List all the movies by their ratings in descending order
+
+```SQL
+SELECT title, rating
+FROM movies
+  JOIN boxoffice
+    ON movies.id = boxoffice.movie_id
+ORDER BY rating DESC;
+```
+
+
+## Lesson 7
+
+### 1. Find the list of all buildings that have employees 
+
+```SQL
+SELECT DISTINCT building FROM employees;
+```
+
+### 2. Find the list of all buildings and their capacity
+
+```SQL
+SELECT * FROM buildings;
+```
+
+### 3. List all buildings and the distinct employee roles in each building (including empty buildings)
+
+```SQL
+SELECT DISTINCT building_name, role 
+FROM buildings 
+  LEFT JOIN employees
+    ON building_name = building;
+```
+
+
+## Lesson 8
+
+### 1. Find the name and role of all employees who have not been assigned to a building
+
+```SQL
+SELECT name, role FROM employees
+WHERE building IS NULL;
+```
+
+### 2. Find the names of the buildings that hold no employees
+
+```SQL
+SELECT DISTINCT building_name
+FROM buildings 
+  LEFT JOIN employees
+    ON building_name = building
+WHERE role IS NULL;
+```
+
+
 ## Lesson 9
 
 ### 1. List all movies and their combined sales in millions of dollars
